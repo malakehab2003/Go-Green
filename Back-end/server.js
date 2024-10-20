@@ -10,8 +10,8 @@ const app = express();
 app.use(logger('dev'));
 app.use(cors());
 app.use(json());
-app.use(urlencoded({ extended: false }));
-app.use(cookieParser())
+app.use(urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use('/api', router);
 
 app.listen(port, () => {
