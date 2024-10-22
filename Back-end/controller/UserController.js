@@ -57,6 +57,30 @@ export async function createUser(req, res) {
     return res.status(400).send({ error: 'Phone number Aready exists' });
   }
 
+  // check email validation
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ error: 'Email not valid' });
+  }
+
+  // check password contain at least 4 chars;
+  const passRegex = /^.{4,}$/;
+  if (!passRegex.test(password)) {
+    return res.status(400).json({ error: 'Password should at least 4 digits' });
+  }
+
+  // check phone number is valid
+  const phoneRegex = /^01\d{9}$/;
+  if (!phoneRegex.test(phone)) {
+    return res.status(400).json({ error: 'Phone number should be 11 digits and start with 01' });
+  }
+
+  // check for valid whatsapp number
+  const whatsappRegex = /^01\d{9}$/;
+  if (!whatsappRegex.test(whatsapp)) {
+    return res.status(400).json({ error: 'whatsapp number should be 11 digits and start with 01' });
+  }
+
   // hash the password in the db
   const hashedPass = sha1(password);
 
@@ -70,8 +94,10 @@ export async function createUser(req, res) {
     address,
     email,
     hashedPass,
+    points: 0,
   });
 
+  // create token to make session to make user stay logged in
   const token = await createToken(email, USERS);
 
   return res.status(201).json({
@@ -86,4 +112,18 @@ export async function createUser(req, res) {
       whatsapp,
     }
   });
+}
+
+export async function getUser (req, res) {
+  const { phone } = req.params;
+
+  if (!phone) {
+    return res.status(400).json({ error: 'no phone number' });
+  }
+
+  const user = await dbClient.client.db(dbClient.database).collection('user').findOne({
+    phone,
+  });
+
+  return res.status(200).json({user});
 }
