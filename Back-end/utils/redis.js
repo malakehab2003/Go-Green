@@ -3,11 +3,22 @@ import { promisify } from 'util';
 
 class RedisClient {
   constructor() {
-    this.client = redis.createClient();
+    this.client = redis.createClient({
+      host: '127.0.0.1',
+      port: 6379,
+    });
 
-    this.client.on('error', (err)=> {
-      console.log(err);
-    })
+    this.client.on('error', (err) => {
+      console.error('Redis error:', err);
+    });
+
+    this.client.on('connect', () => {
+      console.log('Connected to Redis');
+    });
+
+    this.client.on('end', () => {
+      console.log('Redis connection closed');
+    });
   }
 
   isAlive() {
