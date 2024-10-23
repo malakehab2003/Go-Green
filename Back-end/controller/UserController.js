@@ -76,7 +76,6 @@ export async function getUserFromAuth(Auth) {
   const user = await dbClient.client.db(dbClient.database).collection('user').findOne({
     phone,
   });
-  console.log(`i am the id ${user._id}`);
   
   if (!user) {
     throw new Error ('no User');
@@ -237,4 +236,22 @@ export async function deleteUser(req, res) {
   });
 
   return res.status(200).send('user deleted successfully');
+}
+
+export async function getMe(req, res) {
+  let Authorization = req.header('Authorization');
+  
+  if (!Authorization) {
+    res.status(400).json({ error: 'no Authorization' });
+  }
+
+  // get the user
+  let user;
+  try {
+    user = await getUserFromAuth(Authorization);
+  } catch (err) {
+    res.status(400).json({ error: err });
+  }
+
+  return res.status(200).json({ user });
 }
