@@ -2,18 +2,19 @@ import dbClient from '../utils/db.js';
 import sha1 from 'sha1';
 import jsonwebtoken from 'jsonwebtoken';
 import redisClient from '../utils/redis.js';
+import { ObjectId } from 'mongodb';
 
 // make auto increment to db
 let USERS = 0;
 
 // create token for all for making session with user
-export async function createToken(email, id) {
+export async function createToken(phone, id) {
   // get the secret key from the env
 	const jwtSecretKey = process.env.JWT_SECRET_KEY;
 
 	// define data
 	const data = {
-		email
+		phone
 	}
 	const duration = 7 * 24 * 60 * 60;
 	// create token
@@ -22,6 +23,66 @@ export async function createToken(email, id) {
 	});
 	await redisClient.set(token, id, duration);
 	return token;
+}
+
+export async function getTokenFromAuth(Auth) {
+  // check Auth
+  if (!Auth) {
+    throw new Error('No Authorization');
+  }
+
+  // check Bearer
+  if (Auth.slice(0, 7) !== 'Bearer ') {
+		throw new Error('Header should contain Bearer');
+	}
+
+  // remove Bearer
+  const token = Auth.replace('Bearer ', '');
+  return token;
+}
+
+export async function getUserFromAuth(Auth) {
+
+  const token = await getTokenFromAuth(Auth);
+
+  // check validation
+  const jwtSecretKey = process.env.JWT_SECRET_KEY;
+
+  let phone;
+
+  try {
+    const verified = jsonwebtoken.verify(
+      token,
+      jwtSecretKey
+    );
+
+    if (verified) {
+      phone = verified.phone;
+    }
+
+    const currentTime = Math.floor(Date.now() / 1000);
+		if (verified.exp < currentTime) {
+			throw new Error('token Expired');
+		}
+
+  } catch (err) {
+    throw new Error(err);
+  }
+
+  if (!phone) {
+    throw new Error('incorrect Auth');
+  }
+
+  const user = await dbClient.client.db(dbClient.database).collection('user').findOne({
+    phone,
+  });
+  console.log(`i am the id ${user._id}`);
+  
+  if (!user) {
+    throw new Error ('no User');
+  }
+
+  return user;
 }
 
 export async function createUser(req, res) {
@@ -98,7 +159,7 @@ export async function createUser(req, res) {
   });
 
   // create token to make session to make user stay logged in
-  const token = await createToken(email, USERS);
+  const token = await createToken(phone, USERS);
 
   return res.status(201).json({
     token: token,
@@ -114,16 +175,66 @@ export async function createUser(req, res) {
   });
 }
 
-export async function getUser (req, res) {
-  const { phone } = req.params;
+export async function getUser(req, res) {
+  const { id } = req.params;
 
-  if (!phone) {
-    return res.status(400).json({ error: 'no phone number' });
+  if (!id) {
+    return res.status(400).json({ error: 'No id number' });
   }
 
-  const user = await dbClient.client.db(dbClient.database).collection('user').findOne({
-    phone,
+  try {
+    // convert it to a number for the query
+    const numericId = parseInt(id, 10);
+    if (isNaN(numericId)) {
+      return res.status(400).json({ error: 'Invalid id format, must be a number' });
+    }
+
+    // Query the database for the user by numeric id
+    const user = await dbClient.client.db(dbClient.database).collection('user').findOne({
+      _id: numericId,
+    });
+
+    // Check if user is found
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Return the user data
+    return res.status(200).json({ user });
+  } catch (error) {
+    // Catch and return any errors
+    return res.status(500).json({ error });
+  }
+}
+
+
+export async function deleteUser(req, res) {
+  let Authorization = req.header('Authorization');
+
+  if (!Authorization) {
+    res.status(400).json({ error: 'no Authorization' });
+  }
+
+  // get the user
+  let user;
+  try {
+    user = await getUserFromAuth(Authorization);
+  } catch (err) {
+    res.status(400).json({ error: err });
+  }
+
+  // get the token
+  let token;
+  try{
+    token = await getTokenFromAuth(Authorization);
+  } catch (err) {
+    res.status(400).json({ error: err });
+  }
+
+  await redisClient.del(token);
+  await dbClient.client.db(dbClient.database).collection('user').deleteOne({
+    _id: user._id,
   });
 
-  return res.status(200).json({user});
+  return res.status(200).send('user deleted successfully');
 }
