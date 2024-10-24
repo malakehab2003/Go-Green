@@ -84,6 +84,30 @@ export async function getUserFromAuth(Auth) {
   return user;
 }
 
+export async function getUserById(id) {
+  if (!id) {
+    throw new Error('No id number');
+  }
+
+  // convert it to a number for the query
+  const numericId = parseInt(id, 10);
+  if (isNaN(numericId)) {
+    throw new Error('Invalid id format, must be a number');
+  }
+
+  // Query the database for the user by numeric id
+  const user = await dbClient.client.db(dbClient.database).collection('user').findOne({
+    _id: numericId,
+  });
+
+  // Check if user is found
+  if (!user) {
+    return res.status(404).json({ error: 'User not found' });
+  }
+
+  return user
+}
+
 export async function createUser(req, res) {
   // fields should have value
   const requiredFields = [
@@ -177,33 +201,10 @@ export async function createUser(req, res) {
 export async function getUser(req, res) {
   const { id } = req.params;
 
-  if (!id) {
-    return res.status(400).json({ error: 'No id number' });
-  }
+  const user = await getUserById(id);
 
-  try {
-    // convert it to a number for the query
-    const numericId = parseInt(id, 10);
-    if (isNaN(numericId)) {
-      return res.status(400).json({ error: 'Invalid id format, must be a number' });
-    }
-
-    // Query the database for the user by numeric id
-    const user = await dbClient.client.db(dbClient.database).collection('user').findOne({
-      _id: numericId,
-    });
-
-    // Check if user is found
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-
-    // Return the user data
-    return res.status(200).json({ user });
-  } catch (error) {
-    // Catch and return any errors
-    return res.status(500).json({ error });
-  }
+  // Return the user data
+  return res.status(200).json({ user });
 }
 
 
@@ -254,4 +255,25 @@ export async function getMe(req, res) {
   }
 
   return res.status(200).json({ user });
+}
+
+export async function updatePoints(req, res) {
+  const { points, id } = req.body;
+
+  if (!points) {
+    res.status(400).send('Missing Points');
+  }
+
+  if (!id) {
+    res.status(400).send('Missing id');
+  }
+
+  const user = await getUserById(id);
+
+  await dbClient.client.db(dbClient.database).collection('user').updateOne(
+    { _id: user._id },
+    { $inc: {points: parseInt(points)} },
+  );
+
+  return res.status(200).send('points added successfully');
 }

@@ -8,5 +8,6 @@ router.post('/createUser', UserController.createUser);
 router.get('/getUser/:id', UserController.getUser);
 router.delete('/deleteUser', UserController.deleteUser);
 router.get('/getMe', UserController.getMe);
+router.put('/updatePoints', UserController.updatePoints);
 
 export default router;
