@@ -1,14 +1,4 @@
-html, body, #root, .AppRoot {
-  height: 100%; /* Ensures the background image takes full height */
-  margin: 0;
-  padding: 0;
-}
-
 .AppRoot {
-  background-image: url('/background.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  min-height: 100vh; /* Ensures it covers the view height if content is small */
+  width: 100%;
+  overflow-x: hidden;
 }

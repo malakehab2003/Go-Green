@@ -9,7 +9,7 @@ const Navbar = () => {
             <div className="navBar">
                 <a className="navItem" href="#">Home</a>
                 <a className="navItem" href="./login.html">Login</a>
-                <a className="navItem" href="./about.html">About</a>
+                <a className="navItem" href="./about">About</a>
                 <a className="navItem" href="#footer">Contact</a>
             </div>
         </header>
@@ -35,7 +35,7 @@ const Navbar = () => {
                   </li>
       
                   <li className="nav-item">
-                    <a className="nav-link active" aria-current="page" href="./about.html">About</a>
+                    <a className="nav-link active" aria-current="page" href="./about">About</a>
                   </li>
       
                   <li className="nav-item">

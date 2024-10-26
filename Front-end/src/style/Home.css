@@ -1,11 +1,12 @@
 .homeRoot {
- margin: 0;
+  margin: 0;
   padding: 0px;
   background-image: url('/background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  width: 100%;
 }
 
 main {

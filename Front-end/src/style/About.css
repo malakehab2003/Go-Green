@@ -1,0 +1,38 @@
+.aboutRoot {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 98%;
+}
+
+.form {
+  margin: 50px;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-top: 50px;
+}
+
+.about {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: xx-large;
+  color: white;
+}
+
+.copyrite {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  font-size: larger;
+  padding-left: 20px;
+}
+
+@media only screen and (max-width: 414px) {
+  .navbar {
+    visibility: visible;
+  }
+
+  header {
+    visibility: collapse;
+  }
+}
