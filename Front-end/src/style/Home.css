@@ -1,0 +1,101 @@
+.homeRoot {
+ margin: 0;
+  padding: 0px;
+  background-image: url('/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+main {
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+.Choose {
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-size: xx-large;
+  margin-top: 60px;
+  font-weight: bold;
+}
+
+.subs {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.sub {
+  background-image: url('/sub.jpg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 30%;
+  height: 600px;
+}
+
+.homeP {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: x-large;
+}
+
+/* style for the footer */
+
+footer {
+  background-color: #ffffff;
+  padding: 20px;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+}
+
+.contactUs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: xx-large;
+  font-weight: bolder;
+  margin-bottom: 50px;
+}
+
+.contacts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 90px;
+  margin-bottom: 50px;
+}
+
+.contact {
+  width: 70px;
+  height: 70px;
+}
+
+.copyrite {
+  font-size: larger;
+}
+
+
+@media only screen and (max-width: 414px) {
+  .navbar {
+    visibility: visible;
+  }
+
+  header {
+    visibility: collapse;
+  }
+
+  .sub {
+    height: 300px;
+  }
+
+  footer {
+    height: 37vh;
+  }
+}
