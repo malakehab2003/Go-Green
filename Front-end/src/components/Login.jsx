@@ -11,11 +11,11 @@ const Login = () => {
         <h1>LOGIN</h1>
         <div className="line"></div>
 
-        <div className="emailContainer">
-          <div className="emailIcon">
-            <img src="/email.png" className="emailIcon" alt="email image"></img>
+        <div className="phoneContainer">
+          <div className="phoneIcon">
+            <img src="/phone.png" className="phoneIcon" alt="phone image"></img>
           </div>
-          <input type="text" placeholder="email" className="emailInput" />
+          <input type="text" placeholder="phone" className="phoneInput" />
         </div>
 
         <div className="passwordContainer">

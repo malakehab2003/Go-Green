@@ -17,19 +17,19 @@
   margin-bottom: 30px;
 }
 
-.emailContainer {
+.phoneContainer {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 40px;
 }
 
-.emailIcon {
+.phoneIcon {
   width: 80px;
   height: 70px;
 }
 
-.emailInput {
+.phoneInput {
   border: none;
   border-radius: 50px;
   width: 300px;
