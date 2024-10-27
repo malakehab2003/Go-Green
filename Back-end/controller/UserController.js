@@ -177,12 +177,12 @@ export async function createUser(req, res) {
     whatsapp,
     address,
     email,
-    hashedPass,
+    password: hashedPass,
     points: 0,
   });
 
   // create token to make session to make user stay logged in
-  const token = await createToken(phone, USERS);
+  const token = await createToken(phone, USERS.toString());
 
   return res.status(201).json({
     token: token,
@@ -276,4 +276,44 @@ export async function updatePoints(req, res) {
   );
 
   return res.status(200).send('points added successfully');
+}
+
+export async function signin (req, res) {
+  const { phone, password } = req.body;
+
+  if (!phone) {
+    return res.status(400).send('Missing phone');
+  }
+
+  if (!password) {
+    return res.status(400).send('Missing password');
+  }
+
+  const user = await dbClient.client.db(dbClient.database).collection('user').findOne({
+    phone,
+  });
+
+  if (!user) {
+    return res.status(400).send('User not found');
+  }
+
+  const hashed_pass = sha1(password);
+
+  if (user.password !== hashed_pass) {
+    return res.status(400).send('Incorrect password');
+  }
+
+  const token = await createToken(phone, user._id.toString());
+
+  return res.status(200).json({
+    token,
+    user: {
+      id: user._id,
+      email: user.email,
+      name: user.name,
+      whatsapp: user.whatsapp,
+      phone: user.phone,
+      address: user.address,
+    }
+  });
 }
