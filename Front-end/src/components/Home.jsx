@@ -10,9 +10,9 @@ const HomePage = () => {
       <main>
           <h3 className="Choose">Choose your subscribtion</h3>
           <div className="subs">
-            <a className="sub" href="./login.html"></a>
-            <a className="sub" href="./login.html"></a>
-            <a className="sub" href="./login.html"></a>
+            <a className="sub" href="/login"></a>
+            <a className="sub" href="/login"></a>
+            <a className="sub" href="/login"></a>
           </div>
           <p className="homeP">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi</p>
         </main>

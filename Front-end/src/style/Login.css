@@ -1,0 +1,123 @@
+.loginContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 30px;
+}
+
+.loginContainer h1 {
+  color: #ffffff;
+}
+
+.line {
+  width: 70px;
+  height: 3px;
+  background-color: #ffffff;
+  margin-bottom: 30px;
+}
+
+.emailContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.emailIcon {
+  width: 80px;
+  height: 70px;
+}
+
+.emailInput {
+  border: none;
+  border-radius: 50px;
+  width: 300px;
+  height: 30px;
+  padding: 10px;
+}
+
+.passwordContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.passwordIcon {
+  width: 70px;
+  height: 60px;
+}
+
+.passwordInput {
+  border: none;
+  border-radius: 50px;
+  width: 300px;
+  height: 30px;
+  padding: 10px;
+}
+
+.submitContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.submitIcon {
+  width: 70px;
+  height: 70px;
+}
+
+.submitButton {
+  border: none;
+  border-radius: 50px;
+  width: 300px;
+  height: 50px;
+  padding: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.line2 {
+  width: 120px;
+  height: 3px;
+  background-color: #ffffff;
+  margin-bottom: 30px;
+}
+
+.noAccountP {
+  color: #ffffff;
+  font-size: larger;
+}
+
+.createAccount {
+  border: none;
+  border-radius: 50px;
+  width: 300px;
+  height: 50px;
+  padding: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  background-color: rgb(0, 148, 111);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* style of the footer */
+
+.copyrite {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  font-size: larger;
+  padding-left: 20px;
+}
+
+@media only screen and (max-width: 414px) {
+  .navbar {
+    visibility: visible;
+  }
+
+  header {
+    visibility: collapse;
+  }
+}
