@@ -5,6 +5,8 @@ import About from './components/About';
 import Login from './components/Login';
 import Policies from './components/Policies';
 import Signup from './components/Signup';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.css';
 // import Profile from './components/Profile';
 
