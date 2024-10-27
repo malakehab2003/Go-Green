@@ -1,0 +1,179 @@
+.signupContainer {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.signupContainer h1 {
+  color: #ffffff;
+}
+
+.line {
+  width: 200px;
+  height: 3px;
+  background-color: #ffffff;
+  margin-bottom: 30px;
+}
+
+.nameContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.nameIcon {
+  width: 70px;
+  height: 70px;
+  margin-right: 7px;
+}
+
+.nameInput {
+  border: none;
+  border-radius: 50px;
+  width: 300px;
+  height: 30px;
+  padding: 10px;
+}
+
+.addressContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.addressIcon {
+  width: 85px;
+  height: 65px;
+}
+
+.addressInput {
+  border: none;
+  border-radius: 50px;
+  width: 300px;
+  height: 30px;
+  padding: 10px;
+}
+
+.phoneContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.phoneIcon {
+  width: 85px;
+  height: 65px;
+}
+
+.phoneInput {
+  border: none;
+  border-radius: 50px;
+  width: 300px;
+  height: 30px;
+  padding: 10px;
+}
+
+.whatsappContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.whatsappIcon {
+  width: 80px;
+  height: 80px;
+}
+
+.whatsappInput {
+  border: none;
+  border-radius: 50px;
+  width: 300px;
+  height: 30px;
+  padding: 10px;
+}
+
+.emailContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.emailIcon {
+  width: 80px;
+  height: 70px;
+}
+
+.emailInput {
+  border: none;
+  border-radius: 50px;
+  width: 300px;
+  height: 30px;
+  padding: 10px;
+}
+
+.passwordContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.passwordIcon {
+  width: 70px;
+  height: 60px;
+}
+
+.passwordInput {
+  border: none;
+  border-radius: 50px;
+  width: 300px;
+  height: 30px;
+  padding: 10px;
+}
+
+.submitContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.submitIcon {
+  width: 70px;
+  height: 70px;
+}
+
+.submitButton {
+  border: none;
+  border-radius: 50px;
+  width: 300px;
+  height: 50px;
+  padding: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* style of the footer */
+
+.copyrite {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  font-size: larger;
+  padding-left: 20px;
+}
+
+@media only screen and (max-width: 414px) {
+  .navbar {
+    visibility: visible;
+  }
+
+  header {
+    visibility: collapse;
+  }
+}

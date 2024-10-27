@@ -4,6 +4,7 @@ import HomePage from './components/Home';
 import About from './components/About';
 import Login from './components/Login';
 import Policies from './components/Policies';
+import Signup from './components/Signup';
 import './App.css';
 // import Profile from './components/Profile';
 
@@ -17,6 +18,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/policies" element={<Policies />} />
+            <Route path="/signup" element={<Signup />} />
             {/* <Route path="/profile" element={<Profile />} /> */}
           </Routes>
         </div>
