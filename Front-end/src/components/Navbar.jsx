@@ -1,7 +1,17 @@
 import React from 'react';
 import '../style/Navbar.css';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleContactClick = () => {
+    navigate('/');
+    setTimeout(() => {
+      document.getElementById('footer').scrollIntoView({ behavior: 'smooth' });
+    }, 0);
+  };
+
   return (
     <div className='navRoot'>
       <header>
@@ -9,8 +19,8 @@ const Navbar = () => {
             <div className="navBar">
                 <a className="navItem" href="#">Home</a>
                 <a className="navItem" href="./login.html">Login</a>
-                <a className="navItem" href="./about">About</a>
-                <a className="navItem" href="#footer">Contact</a>
+                <a className="navItem" href="/about">About</a>
+                <a className="navItem" onClick={handleContactClick}>Contact</a>
             </div>
         </header>
         <nav className="navbar bg-body-tertiary fixed-top">
