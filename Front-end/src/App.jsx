@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './components/Home';
 import About from './components/About';
 import Login from './components/Login';
+import Policies from './components/Policies';
 import './App.css';
 // import Profile from './components/Profile';
 
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/policies" element={<Policies />} />
             {/* <Route path="/profile" element={<Profile />} /> */}
           </Routes>
         </div>
