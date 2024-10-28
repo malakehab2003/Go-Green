@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Navbar from './Navbar';
 import '../style/Home.css';
+import { useNavigate } from 'react-router-dom';
+
 
 const HomePage = () => {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      axios.get('/api/getMe', { headers: { Authorization: `Bearer ${token}` } })
+        .then(response => setUser(response.data.user))
+        .catch(() => setUser(null));
+    }
+  }, []);
+
+  const handlePurshase = () => {
+    if (!user) {
+      alert('Log in first');
+      navigate('/login')
+    } else {
+      navigate('/purshase');
+    }
+  }
+
   return (
     <div className='homeRoot'>
 
@@ -10,9 +34,9 @@ const HomePage = () => {
       <main>
           <h3 className="Choose">Choose your subscribtion</h3>
           <div className="subs">
-            <a className="sub" href="/login"></a>
-            <a className="sub" href="/login"></a>
-            <a className="sub" href="/login"></a>
+            <a className="sub" onClick={handlePurshase}></a>
+            <a className="sub" onClick={handlePurshase}></a>
+            <a className="sub" onClick={handlePurshase}></a>
           </div>
           <p className="homeP">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi</p>
         </main>

@@ -9,6 +9,6 @@ router.get('/getUser/:id', UserController.getUser);
 router.delete('/deleteUser', UserController.deleteUser);
 router.get('/getMe', UserController.getMe);
 router.put('/updatePoints', UserController.updatePoints);
-router.post('/signin', UserController.signin);
+router.post('/login', UserController.login);
 
 export default router;

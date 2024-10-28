@@ -278,7 +278,7 @@ export async function updatePoints(req, res) {
   return res.status(200).send('points added successfully');
 }
 
-export async function signin (req, res) {
+export async function login (req, res) {
   const { phone, password } = req.body;
 
   if (!phone) {

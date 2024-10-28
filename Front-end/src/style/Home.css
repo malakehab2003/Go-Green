@@ -21,6 +21,7 @@ main {
   font-size: xx-large;
   margin-top: 60px;
   font-weight: bold;
+  margin-bottom: 50px;
 }
 
 .subs {
@@ -35,10 +36,12 @@ main {
   background-position: center;
   background-repeat: no-repeat;
   width: 30%;
-  height: 600px;
+  height: 450px;
+  cursor: pointer;
 }
 
 .homeP {
+  margin-top: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
