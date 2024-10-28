@@ -6,13 +6,14 @@ import { useNavigate } from 'react-router-dom';
 
 
 const HomePage = () => {
+  const url = 'http://localhost:5000/api';
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      axios.get('/api/getMe', { headers: { Authorization: `Bearer ${token}` } })
+      axios.get(`${url}/getMe`, { headers: { Authorization: `Bearer ${token}` } })
         .then(response => setUser(response.data.user))
         .catch(() => setUser(null));
     }

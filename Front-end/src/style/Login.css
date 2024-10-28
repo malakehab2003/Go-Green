@@ -37,6 +37,13 @@
   padding: 10px;
 }
 
+.inputError {
+  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .passwordContainer {
   display: flex;
   align-items: center;
