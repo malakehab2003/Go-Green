@@ -24,6 +24,19 @@ const Navbar = () => {
     }, 0);
   };
 
+  const handleLogout = async () => {
+    const token = localStorage.getItem('token');
+    await axios.post(
+      `${url}/logout`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    localStorage.removeItem('token');
+    navigate('/');
+  }
+
   return (
     <div className='navRoot'>
       <header>
@@ -31,7 +44,7 @@ const Navbar = () => {
             <div className="navBar">
                 <a className="navItem" href="/">Home</a>
                 {user? (<>
-                  <a className="navItem" href="/logout">Logout</a>
+                  <a className="navItem"onClick={handleLogout}>Logout</a>
                   <a className="navItem" href="/profile">Profile</a>
                   </>
                   ):(

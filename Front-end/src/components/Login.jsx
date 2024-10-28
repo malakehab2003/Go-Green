@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +6,7 @@ import '../style/Login.css';
 
 const Login = () => {
   const url = 'http://localhost:5000/api';
+  const [user, setUser] = useState(null);
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [phoneError, setPhoneError] = useState(null);
@@ -14,9 +15,19 @@ const Login = () => {
   const [validPassword, setValidPassword] = useState('');
   const navigate = useNavigate();
 
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      axios.get(`${url}/getMe`, { headers: { Authorization: `Bearer ${token}` } })
+        .then(response => setUser(response.data.user))
+        .catch(() => setUser(null));
+    }
+  }, []);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (validPassword && validPhone) {
+    if (validPassword && validPhone && !user) {
       try {
         const response = await axios.post(`${url}/login`, { phone: validPhone, password: validPassword  });
         const { token } = response.data;
@@ -28,6 +39,9 @@ const Login = () => {
         console.error('Login failed:', err);
         alert('Login failed. Please check your credentials and try again.');
       }
+    } else {
+      console.error('Login failed user logged in or invalid credentials');
+      alert('Login failed. Please check your credentials and try again.');
     }
   }
 
@@ -41,8 +55,9 @@ const Login = () => {
 
     const phoneRegex = /^01\d{9}$/;
     if (!phoneRegex.test(value)) {
-      setPhoneError('phone should be 11 number start with 01')
+      setPhoneError('phone should be 11 number start with 01');
     } else {
+      setPhone(value);
       setValidPhone(value);
       setPhoneError(null);
     }
@@ -60,6 +75,7 @@ const Login = () => {
     if (!passRegex.test(value)) {
       setPasswordError('password should be at least 4 chars');
     } else {
+      setPassword(value);
       setValidPassword(value);
       setPasswordError(null);
     }

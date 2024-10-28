@@ -111,11 +111,9 @@ export async function getUserById(id) {
 export async function createUser(req, res) {
   // fields should have value
   const requiredFields = [
-    { field: 'email', errorMessage: 'Missing Email' },
     { field: 'password', errorMessage: 'Missing Password' },
     { field: 'name', errorMessage: 'Missing Name' },
     { field: 'phone', errorMessage: 'Missing Phone' },
-    { field: 'whatsapp', errorMessage: 'Missing Whatsapp' },
     { field: 'address', errorMessage: 'Missing Address' }
   ];
   
@@ -143,7 +141,7 @@ export async function createUser(req, res) {
 
   // check email validation
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  if (!emailRegex.test(email)) {
+  if (email && !emailRegex.test(email)) {
     return res.status(400).json({ error: 'Email not valid' });
   }
 
@@ -161,7 +159,7 @@ export async function createUser(req, res) {
 
   // check for valid whatsapp number
   const whatsappRegex = /^01\d{9}$/;
-  if (!whatsappRegex.test(whatsapp)) {
+  if (whatsapp && !whatsappRegex.test(whatsapp)) {
     return res.status(400).json({ error: 'whatsapp number should be 11 digits and start with 01' });
   }
 
@@ -316,4 +314,22 @@ export async function login (req, res) {
       address: user.address,
     }
   });
+}
+
+export async function logout(req, res) {
+  let Authorization = req.header('Authorization');
+  
+  if (!Authorization) {
+    return res.status(400).json({ error: 'no Authorization' });
+  }
+
+  let token;
+  try{
+    token = await getTokenFromAuth(Authorization);
+  } catch (err) {
+    return res.status(400).json({ error: err });
+  }
+
+  await redisClient.del(token);
+  return res.status(200).send('logged out successfully');
 }
