@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../style/Navbar.css';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+  const url = 'http://localhost:5000/api';
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      axios.get(`${url}/getMe`, { headers: { Authorization: `Bearer ${token}` } })
+        .then(response => setUser(response.data.user))
+        .catch(() => setUser(null));
+    }
+  }, []);
 
   const handleContactClick = () => {
     navigate('/');
@@ -18,7 +30,13 @@ const Navbar = () => {
             <a className="logo" href="/">Lorem</a>
             <div className="navBar">
                 <a className="navItem" href="/">Home</a>
-                <a className="navItem" href="/login">Login</a>
+                {user? (<>
+                  <a className="navItem" href="/logout">Logout</a>
+                  <a className="navItem" href="/profile">Profile</a>
+                  </>
+                  ):(
+                    <a className="navItem" href="/login">Login</a>
+                  )}
                 <a className="navItem" href="/about">About</a>
                 <a className="navItem" onClick={handleContactClick}>Contact</a>
             </div>
