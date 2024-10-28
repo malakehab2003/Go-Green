@@ -45,13 +45,3 @@
   padding-left: 20px;
 
 }
-
-@media only screen and (max-width: 414px) {
-  .navbar {
-    visibility: visible;
-  }
-
-  header {
-    visibility: collapse;
-  }
-}

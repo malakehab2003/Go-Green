@@ -5,6 +5,7 @@ import About from './components/About';
 import Login from './components/Login';
 import Policies from './components/Policies';
 import Signup from './components/Signup';
+import Purshase from './components/purshase';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.css';
@@ -21,6 +22,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/policies" element={<Policies />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/purshase" element={<Purshase />} />
             {/* <Route path="/profile" element={<Profile />} /> */}
           </Routes>
         </div>
