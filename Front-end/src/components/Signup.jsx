@@ -35,6 +35,12 @@ const Signup = () => {
   }, []);
 
   const handleSubmit = async (event) => {
+    const agree = localStorage.getItem("agree");
+    if (agree !== "true") {
+      alert ('you have to agree policies first');
+      navigate('/policies');
+      return;
+    }
     event.preventDefault();
     if (!user && !phoneError && !nameError && !passwordError && !addressError && !selectedPlaceError) {
       try {
@@ -256,6 +262,7 @@ const Signup = () => {
               className="emailInput"
               value={email}
               onChange={handleEmailError}
+              autoComplete="username"
               />
           </div>
           {emailError && (
@@ -273,6 +280,7 @@ const Signup = () => {
               value={password}
               onChange={handlePasswordError}
               required
+              autoComplete="current-password"
               />
           </div>
           {passwordError && (
