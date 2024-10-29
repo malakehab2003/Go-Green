@@ -15,12 +15,12 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
   const [address, setAddress] = useState('');
-  const [phoneError, setPhoneError] = useState('');
-  const [nameError, setNameError] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [whatsappError, setWhatsappError] = useState('');
-  const [addressError, setAddressError] = useState('');
+  const [phoneError, setPhoneError] = useState(null);
+  const [nameError, setNameError] = useState(null);
+  const [emailError, setEmailError] = useState(null);
+  const [passwordError, setPasswordError] = useState(null);
+  const [whatsappError, setWhatsappError] = useState(null);
+  const [addressError, setAddressError] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -33,7 +33,7 @@ const Signup = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!user) {
+    if (!user && !phoneError && !nameError && !passwordError && !addressError) {
       try {
         const response = await axios.post(`${url}/createUser`, { phone, password, name, whatsapp, email, address  });
         const { token } = response.data;
