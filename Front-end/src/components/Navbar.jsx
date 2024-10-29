@@ -35,6 +35,7 @@ const Navbar = () => {
     );
     localStorage.removeItem('token');
     navigate('/');
+    window.location.reload();
   }
 
   return (
