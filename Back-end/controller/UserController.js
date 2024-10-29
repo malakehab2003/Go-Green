@@ -332,3 +332,27 @@ export async function logout(req, res) {
   await redisClient.del(token);
   return res.status(200).send('logged out successfully');
 }
+
+export async function chooseSub(req, res) {
+  let Authorization = req.header('Authorization');
+  const { sub } = req.body;
+  
+  if (!Authorization) {
+    return res.status(400).json({ error: 'no Authorization' });
+  }
+
+  // get the user
+  let user;
+  try {
+    user = await getUserFromAuth(Authorization);
+  } catch (err) {
+    return res.status(400).json({ error: err });
+  }
+
+  await dbClient.client.db(dbClient.database).collection('user').updateOne(
+    { _id: user._id },
+    { $set: { sub:  sub } },
+  );
+
+  return res.status(200).send('subscribtion updated successfully');
+}

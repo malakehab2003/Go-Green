@@ -10,6 +10,7 @@ router.delete('/deleteUser', UserController.deleteUser);
 router.get('/getMe', UserController.getMe);
 router.put('/updatePoints', UserController.updatePoints);
 router.post('/login', UserController.login);
-router.post('/logout', UserController.logout)
+router.post('/logout', UserController.logout);
+router.put('/chooseSub', UserController.chooseSub);
 
 export default router;

@@ -19,11 +19,18 @@ const HomePage = () => {
     }
   }, []);
 
-  const handlePurshase = () => {
+  const handlePurshase = async (sub) => {
     if (!user) {
       alert('Log in first');
       navigate('/login')
     } else {
+      const response = await axios.put(`${url}/chooseSub`, {
+         sub
+        }, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+      });
       navigate('/purshase');
     }
   }
@@ -35,9 +42,9 @@ const HomePage = () => {
       <main>
           <h3 className="Choose">Choose your subscribtion</h3>
           <div className="subs">
-            <a className="sub" onClick={handlePurshase}></a>
-            <a className="sub" onClick={handlePurshase}></a>
-            <a className="sub" onClick={handlePurshase}></a>
+            <a className="sub" onClick={() => handlePurshase('first choice')}></a>
+            <a className="sub" onClick={() => handlePurshase('second choice')}></a>
+            <a className="sub" onClick={() => handlePurshase('third choice')}></a>
           </div>
           <p className="homeP">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi</p>
         </main>
