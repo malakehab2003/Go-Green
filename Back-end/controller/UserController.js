@@ -181,6 +181,7 @@ export async function createUser(req, res) {
     landmark,
     place,
     points: 0,
+    is_paid: 'false',
   });
 
   // create token to make session to make user stay logged in
