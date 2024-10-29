@@ -52,7 +52,7 @@ const Navbar = () => {
                     <a className="navItem" href="/login">Login</a>
                   )}
                 <a className="navItem" href="/about">About</a>
-                <a className="navItem" onClick={handleContactClick}>Contact</a>
+                <a className="navItem" onClick={handleContactClick}>Contact and Report</a>
             </div>
         </header>
         <nav className="navbar bg-body-tertiary fixed-top">
@@ -81,7 +81,7 @@ const Navbar = () => {
                   </li>
       
                   <li className="nav-item">
-                    <a className="nav-link active" aria-current="page" href="/#footer">Contact</a>
+                    <a className="nav-link active" aria-current="page" onClick={handleContactClick}>Contact and Report</a>
                   </li>
                 </ul>
               </div>

@@ -15,12 +15,15 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
   const [address, setAddress] = useState('');
+  const [landmark, setLandmark] = useState('');
   const [phoneError, setPhoneError] = useState(null);
   const [nameError, setNameError] = useState(null);
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
   const [whatsappError, setWhatsappError] = useState(null);
   const [addressError, setAddressError] = useState(null);
+  const [selectedPlace, setSelectedPlace] = useState('');
+  const [selectedPlaceError, setSelectedPlaceError] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -33,9 +36,9 @@ const Signup = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!user && !phoneError && !nameError && !passwordError && !addressError) {
+    if (!user && !phoneError && !nameError && !passwordError && !addressError && !selectedPlaceError) {
       try {
-        const response = await axios.post(`${url}/createUser`, { phone, password, name, whatsapp, email, address  });
+        const response = await axios.post(`${url}/createUser`, { phone, password, name, whatsapp, email, address, landmark, place: selectedPlace });
         const { token } = response.data;
 
         // save token in localStorage
@@ -47,7 +50,7 @@ const Signup = () => {
       }
     } else {
       console.error('Login failed user logged in');
-      alert('Login failed. Please check your credentials and try again.');
+      alert('Login failed. Please check your credentials and try again or you are logged in.');
     }
   }
 
@@ -124,6 +127,16 @@ const Signup = () => {
     }
   }
 
+  const handleSelection = (event) => {
+    const value = event.target.value;
+    setSelectedPlace(value);
+    if (!value) {
+      setSelectedPlaceError('place is requried');
+    } else {
+      setSelectedPlaceError(null);
+    }
+  }
+
   return (
     <div className="signupRoot">
       <Navbar />
@@ -183,6 +196,26 @@ const Signup = () => {
 							<p className='inputError'>{whatsappError}</p>
 						)}
 
+<div className="addressContainer">
+            <div className="addressIcon">
+              <img src="/address.png" className="addressIcon" alt="address image"></img>
+            </div>
+            <select 
+              className="addressInput" 
+              value={selectedPlace} 
+              onChange={handleSelection}
+              required
+            >
+              <option value="">Select a Place</option>
+              <option value="قسم اول">قسم اول</option>
+              <option value="قسم تاني">قسم تاني</option>
+              <option value="استاد او سبرباي">استاد او سبرباي</option>
+            </select>
+          </div>
+          {selectedPlaceError && (
+							<p className='inputError'>{selectedPlaceError}</p>
+						)}
+
           <div className="addressContainer">
             <div className="addressIcon">
               <img src="/address.png" className="addressIcon" alt="address image"></img>
@@ -200,6 +233,18 @@ const Signup = () => {
 							<p className='inputError'>{addressError}</p>
 						)}
 
+<div className="landmarkContainer">
+            <div className="landmarkIcon">
+              <img src="/address.png" className="landmarkIcon" alt="landmark image"></img>
+            </div>
+            <input
+              type="landmark"
+              placeholder="landmark"
+              className="landmarkInput"
+              value={landmark}
+              onChange={(e) => setLandmark(e.target.value)}
+              />
+          </div>
 
           <div className="emailContainer">
             <div className="emailIcon">

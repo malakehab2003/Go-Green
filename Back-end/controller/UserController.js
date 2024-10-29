@@ -111,6 +111,7 @@ export async function getUserById(id) {
 export async function createUser(req, res) {
   // fields should have value
   const requiredFields = [
+    { field: 'place', errorMessage: 'Missing Place' },
     { field: 'password', errorMessage: 'Missing Password' },
     { field: 'name', errorMessage: 'Missing Name' },
     { field: 'phone', errorMessage: 'Missing Phone' },
@@ -128,7 +129,8 @@ export async function createUser(req, res) {
   }
   
   // get each value in it's field
-  const { email, password, name, phone, whatsapp, address } = variables;
+  const { password, name, phone, address, place } = variables;
+  const { email, landmark, whatsapp } = req.body;
 
   // check that phone number is unique
   const user = await dbClient.client.db(dbClient.database).collection('user').findOne({
@@ -176,6 +178,8 @@ export async function createUser(req, res) {
     address,
     email,
     password: hashedPass,
+    landmark,
+    place,
     points: 0,
   });
 
@@ -191,7 +195,9 @@ export async function createUser(req, res) {
       email,
       hashedPass,
       address,
+      landmark,
       whatsapp,
+      place,
     }
   });
 }
@@ -305,14 +311,7 @@ export async function login (req, res) {
 
   return res.status(200).json({
     token,
-    user: {
-      id: user._id,
-      email: user.email,
-      name: user.name,
-      whatsapp: user.whatsapp,
-      phone: user.phone,
-      address: user.address,
-    }
+    user,
   });
 }
 
