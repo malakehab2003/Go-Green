@@ -9,7 +9,7 @@ import Purshase from './components/purshase';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.css';
-// import Profile from './components/Profile';
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
             <Route path="/policies" element={<Policies />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/purshase" element={<Purshase />} />
-            {/* <Route path="/profile" element={<Profile />} /> */}
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </div>
       </Router>
