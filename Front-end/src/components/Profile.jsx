@@ -185,6 +185,22 @@ const Profile = () => {
               </div>
             </div>
 
+            <div className="dataContainer">
+              <div className="dataIcon">
+                  <p className="dataType">SUBSCRIBTION</p>
+              </div>
+              <div
+              type="name"
+              className="userData"
+              >
+                {user ? (
+                  user.sub
+                ): (
+                  "Not added"
+                )}
+              </div>
+            </div>
+
         </div>
       </main>
       <footer>
