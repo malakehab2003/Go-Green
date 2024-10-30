@@ -85,12 +85,12 @@ export async function getUserFromAuth(Auth) {
 }
 
 export async function getUserById(id) {
-  if (!id) {
+  const numericId = parseInt(id, 10);
+  if (!numericId) {
     throw new Error('No id number');
   }
 
   // convert it to a number for the query
-  const numericId = parseInt(id, 10);
   if (isNaN(numericId)) {
     throw new Error('Invalid id format, must be a number');
   }
@@ -102,7 +102,7 @@ export async function getUserById(id) {
 
   // Check if user is found
   if (!user) {
-    return res.status(404).json({ error: 'User not found' });
+    throw new Error ('User not found' );
   }
 
   return user
@@ -266,11 +266,11 @@ export async function updatePoints(req, res) {
   const { points, id } = req.body;
 
   if (!points) {
-    res.status(400).send('Missing Points');
+    return res.status(400).send('Missing Points');
   }
 
   if (!id) {
-    res.status(400).send('Missing id');
+    return res.status(400).send('Missing id');
   }
 
   const user = await getUserById(id);
