@@ -71,10 +71,24 @@ const Navbar = () => {
                   <li className="nav-item">
                     <a className="nav-link active" aria-current="page" href="/">Home</a>
                   </li>
-      
-                  <li className="nav-item">
-                    <a className="nav-link active" href="/login">Login</a>
-                  </li>
+
+                  {user? (
+                    <>
+                      <li className="nav-item">
+                        <a className="nav-link active" onClick={handleLogout}>Logout</a>
+                      </li>
+
+                      <li className="nav-item">
+                        <a className="nav-link active" href="/profile">Profile</a>
+                      </li>
+                    </>
+                  ):(
+                    <>
+                      <li className="nav-item">
+                        <a className="nav-link active" href="/login">Login</a>
+                      </li>
+                    </>
+                  )}
       
                   <li className="nav-item">
                     <a className="nav-link active" aria-current="page" href="/about">About</a>
