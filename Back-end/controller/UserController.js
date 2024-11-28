@@ -217,7 +217,7 @@ export async function deleteUser(req, res) {
   let Authorization = req.header('Authorization');
 
   if (!Authorization) {
-    res.status(400).json({ error: 'no Authorization' });
+    return res.status(400).json({ error: 'no Authorization' });
   }
 
   // get the user
@@ -225,7 +225,7 @@ export async function deleteUser(req, res) {
   try {
     user = await getUserFromAuth(Authorization);
   } catch (err) {
-    res.status(400).json({ error: err });
+    return res.status(400).json({ error: err });
   }
 
   // get the token
@@ -233,7 +233,7 @@ export async function deleteUser(req, res) {
   try{
     token = await getTokenFromAuth(Authorization);
   } catch (err) {
-    res.status(400).json({ error: err });
+    return res.status(400).json({ error: err });
   }
 
   await redisClient.del(token);
@@ -248,7 +248,7 @@ export async function getMe(req, res) {
   let Authorization = req.header('Authorization');
   
   if (!Authorization) {
-    res.status(400).json({ error: 'no Authorization' });
+    return res.status(400).json({ error: 'no Authorization' });
   }
 
   // get the user
@@ -256,7 +256,7 @@ export async function getMe(req, res) {
   try {
     user = await getUserFromAuth(Authorization);
   } catch (err) {
-    res.status(400).json({ error: err });
+    return res.status(400).json({ error: err });
   }
 
   return res.status(200).json({ user });

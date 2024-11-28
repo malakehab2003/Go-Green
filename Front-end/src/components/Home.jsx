@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const HomePage = () => {
-  const url = 'http://localhost:5000/api';
+  const url = 'http://192.168.1.77:5000/api';
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 

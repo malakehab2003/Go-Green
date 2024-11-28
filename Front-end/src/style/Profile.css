@@ -1,7 +1,11 @@
+.dataContainer {
+  width: 90%;
+}
+
 .userData {
   background-color: white;
   border-radius: 50px;
-  width: 700px;
+  width: 100%;
   height: 50px;
   padding: 10px;
   display: flex;

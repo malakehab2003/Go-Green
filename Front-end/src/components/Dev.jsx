@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../style/Div.css';
+import Navbar from './Navbar';
 
 
 const Div = () => {
-  const url = 'http://localhost:5000/api';
+  const url = 'http://192.168.1.77:5000/api';
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passcode, setPasscode] = useState('');
   const [userId, setUserId] = useState('');
@@ -36,6 +37,7 @@ const Div = () => {
 
   return (
     <div className='divRoot'>
+      <Navbar />
       <div className="admin-container">
         {!isAuthenticated ? (
           <form onSubmit={handlePasscodeSubmit} className="passcode-form">
