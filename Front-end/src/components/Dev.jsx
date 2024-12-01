@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../style/Div.css';
+import '../style/Dev.css';
 import Navbar from './Navbar';
 
 
-const Div = () => {
-  const url = 'http://192.168.1.77:5000/api';
+const Dev = () => {
+  const url = `${window.location.protocol}//${window.location.hostname}:5000/api`;
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passcode, setPasscode] = useState('');
   const [userId, setUserId] = useState('');
@@ -79,4 +79,4 @@ const Div = () => {
   );
 
 }
-export default Div;
+export default Dev;

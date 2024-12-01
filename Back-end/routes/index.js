@@ -12,5 +12,6 @@ router.put('/updatePoints', UserController.updatePoints);
 router.post('/login', UserController.login);
 router.post('/logout', UserController.logout);
 router.put('/chooseSub', UserController.chooseSub);
+router.put('/isPaid', UserController.isPaid);
 
 export default router;

@@ -75,7 +75,7 @@ nav {
   color: #3ead23;
 }
 
-@media only screen and (max-width: 414px) {
+@media only screen and (max-width: 599px) {
   .navbar {
     visibility: visible;
   }

@@ -4,7 +4,7 @@ import '../style/Navbar.css';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-  const url = 'http://192.168.1.77:5000/api';
+  const url = `${window.location.protocol}//${window.location.hostname}:5000/api`;
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 

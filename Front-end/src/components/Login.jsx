@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import '../style/Login.css';
 
 const Login = () => {
-  const url = 'http://192.168.1.77:5000/api';
+  const url = `${window.location.protocol}//${window.location.hostname}:5000/api`;
   const [user, setUser] = useState(null);
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');

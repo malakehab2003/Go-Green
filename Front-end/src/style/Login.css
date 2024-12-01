@@ -23,7 +23,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 40px;
-  width: 90%;
+  /* width: 90%; */
 }
 
 .phoneIcon {
@@ -51,7 +51,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 40px;
-  width: 90%;
+  /* width: 90%; */
 }
 
 .passwordIcon {
@@ -72,7 +72,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 40px;
-  width: 90%;
+  /* width: 90%; */
 }
 
 .submitIcon {

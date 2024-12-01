@@ -6,7 +6,7 @@ import '../style/Signup.css';
 
 
 const Signup = () => {
-  const url = 'http://192.168.1.77:5000/api';
+  const url = `${window.location.protocol}//${window.location.hostname}:5000/api`;
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const [phone, setPhone] = useState('');
@@ -42,7 +42,7 @@ const Signup = () => {
       return;
     }
     event.preventDefault();
-    if (!user && !phoneError && !nameError && !passwordError && !addressError && !selectedPlaceError) {
+    if (!user && !phoneError && !nameError && !passwordError && !addressError && !selectedPlaceError && !addressError && landmark) {
       try {
         const response = await axios.post(`${url}/createUser`, { phone, password, name, whatsapp, email, address, landmark, place: selectedPlace });
         const { token } = response.data;
@@ -196,6 +196,7 @@ const Signup = () => {
               className="whatsappInput"
               value={whatsapp}
               onChange={handleWhatsappError}
+              required
               />
           </div>
           {whatsappError && (
@@ -239,7 +240,7 @@ const Signup = () => {
 							<p className='inputError'>{addressError}</p>
 						)}
 
-<div className="landmarkContainer">
+          <div className="landmarkContainer">
             <div className="landmarkIcon">
               <img src="/address.png" className="landmarkIcon" alt="landmark image"></img>
             </div>
@@ -249,6 +250,7 @@ const Signup = () => {
               className="landmarkInput"
               value={landmark}
               onChange={(e) => setLandmark(e.target.value)}
+              required
               />
           </div>
 

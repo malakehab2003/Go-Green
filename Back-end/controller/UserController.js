@@ -115,7 +115,9 @@ export async function createUser(req, res) {
     { field: 'password', errorMessage: 'Missing Password' },
     { field: 'name', errorMessage: 'Missing Name' },
     { field: 'phone', errorMessage: 'Missing Phone' },
-    { field: 'address', errorMessage: 'Missing Address' }
+    { field: 'address', errorMessage: 'Missing Address' },
+    { field: 'landmark', errorMessage: 'Missing Landmark' },
+    { field: 'whatsapp', errorMessage: 'Missing Whatsapp' }
   ];
   
   let variables = {};
@@ -129,8 +131,8 @@ export async function createUser(req, res) {
   }
   
   // get each value in it's field
-  const { password, name, phone, address, place } = variables;
-  const { email, landmark, whatsapp } = req.body;
+  const { password, name, phone, address, place, landmark, whatsapp } = variables;
+  const { email } = req.body;
 
   // check that phone number is unique
   const user = await dbClient.client.db(dbClient.database).collection('user').findOne({
@@ -199,6 +201,7 @@ export async function createUser(req, res) {
       landmark,
       whatsapp,
       place,
+      is_paid: 'false',
     }
   });
 }
@@ -356,4 +359,27 @@ export async function chooseSub(req, res) {
   );
 
   return res.status(200).send('subscribtion updated successfully');
+}
+
+export async function isPaid(req, res) {
+  const { id, pay } = req.body;
+
+  if (!id) {
+    console.log('ip is Missing');
+    return res.status(401).send('ip is Missing');
+  }
+
+  if (!pay) {
+    console.log('pay is Missing');
+    return res.status(401).send('pay is Missing');
+  }
+
+  const user = await getUserById(id);
+
+  await dbClient.client.db(dbClient.database).collection('user').updateOne(
+    { _id: user._id },
+    { $set: { is_paid: pay } },
+  );
+
+  return res.status(200).send(' payment updated successfully');
 }
