@@ -49,6 +49,7 @@
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-bottom: 15px;
 }
 
 .submit-button:hover {

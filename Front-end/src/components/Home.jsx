@@ -35,6 +35,10 @@ const HomePage = () => {
     }
   }
 
+  const handleLockedPurshase = (e) => {
+    alert('Not allowed right now, First subscription is just allowed');
+  }
+
   return (
     <div className='homeRoot'>
 
@@ -42,9 +46,9 @@ const HomePage = () => {
       <main>
           <h3 className="Choose">Choose your subscribtion</h3>
           <div className="subs">
-            <a className="sub" onClick={() => handlePurshase('first choice')}></a>
-            <a className="sub" onClick={() => handlePurshase('second choice')}></a>
-            <a className="sub" onClick={() => handlePurshase('third choice')}></a>
+            <img className="sub" alt='sub' src='/sub.jpg' onClick={() => handlePurshase('first choice')}></img>
+            <img className="subLocked" alt='sub' src='/sub.jpg' onClick={() => handleLockedPurshase()}></img>
+            <img className="subLocked" alt='sub' src='/sub.jpg' onClick={() => handleLockedPurshase()}></img>
           </div>
           <p className="homeP">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi</p>
         </main>

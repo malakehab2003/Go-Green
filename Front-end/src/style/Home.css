@@ -31,13 +31,16 @@ main {
 }
 
 .sub {
-  background-image: url('/sub.jpg');
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
   width: 30%;
-  height: 450px;
+  height: auto;
   cursor: pointer;
+}
+
+.subLocked {
+  width: 30%;
+  height: auto;
+  cursor: pointer;
+  cursor: not-allowed;
 }
 
 .homeP {

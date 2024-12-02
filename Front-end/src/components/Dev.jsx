@@ -10,6 +10,7 @@ const Dev = () => {
   const [passcode, setPasscode] = useState('');
   const [userId, setUserId] = useState('');
   const [points, setPoints] = useState('');
+  const [payment, setPayment] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const handlePasscodeSubmit = async (e) => {
@@ -34,6 +35,19 @@ const Dev = () => {
       console.error('Error updating points:', error);
     }
   };
+
+  const changePayment = async (e) => {
+    e.preventDefault();
+    try{
+      await axios.put(`${url}/isPaid`, { pay: payment, id: userId });
+      alert('Payment updated successfully');
+      setUserId('');
+      setPoints('');
+    } catch (err) {
+      alert('Failed to update payment');
+      console.error('Error updating payment:', err);
+    }
+  }
 
   return (
     <div className='divRoot'>
@@ -71,7 +85,21 @@ const Dev = () => {
                 className="points-input"
               />
             </div>
+
             <button type="submit" className="submit-button">Add Points</button>
+
+            <div className="input-container">
+              <label>payment state:</label>
+              <input
+                type="text"
+                value={payment}
+                onChange={(e) => setPayment(e.target.value)}
+                className="user-id-input"
+              />
+            </div>
+
+            <button onClick={changePayment} className="submit-button">change payment</button>
+
           </form>
         )}
       </div>
