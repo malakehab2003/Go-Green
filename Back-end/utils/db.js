@@ -6,7 +6,7 @@ class DbClinet{
     this.port = process.env.DB_PORT || 27017;
     this.database = process.env.DB_DATABASE || 'be_clean'
 
-    const url = `mongodb://${this.host}:${this.port}/${this.database}`;
+    const url = `mongodb://mongo:DSlvYLjZuEwFhnkPbvnikonRZksuxivC@centerbeam.proxy.rlwy.net:12997`;
 
     this.client = new MongoClient(url);
 

@@ -19,7 +19,7 @@ const Profile = () => {
   }, []);
 
   const handleDeleteAccount = async () => {
-    const isConfirmed = window.confirm("Are you sure you want to delete your account? This action cannot be undone.");
+    const isConfirmed = window.confirm("Are you sure you want to delete your account? This action cannot be undo.");
     if (isConfirmed) {
       try {
         await axios.delete(`${url}/deleteUser`, { headers: { Authorization: `Bearer ${token}` } });
