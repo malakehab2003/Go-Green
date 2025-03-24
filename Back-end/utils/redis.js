@@ -4,8 +4,7 @@ import { promisify } from 'util';
 class RedisClient {
   constructor() {
     this.client = redis.createClient({
-      host: '127.0.0.1',
-      port: 6379,
+      url: 'redis://default:hTuELAENuHQmMVoglEmbEKySCyEDBhmF@shuttle.proxy.rlwy.net:53706'
     });
 
     this.client.on('error', (err) => {
